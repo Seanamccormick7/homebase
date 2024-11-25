@@ -7,8 +7,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "PetSoft - Pet daycare software",
-  description: "Take care of people's pets responsibly with PetSoft.",
+  title: "Homebase - Propety Management Portal",
+  description: "Manage all your properties with Homebase.",
 };
 
 export default function RootLayout({

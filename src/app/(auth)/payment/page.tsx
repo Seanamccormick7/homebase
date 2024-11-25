@@ -18,7 +18,7 @@ export default function Page({
 
   return (
     <main className="flex flex-col items-center space-y-10">
-      <H1>PetSoft access requires payment</H1>
+      <H1>Homebase access requires payment</H1>
 
       {searchParams.success && (
         <Button
@@ -28,7 +28,7 @@ export default function Page({
           }}
           disabled={status === "loading" || session?.user.hasAccess}
         >
-          Access PetSoft
+          Access Homebase
         </Button>
       )}
 
@@ -47,7 +47,7 @@ export default function Page({
 
       {searchParams.success && (
         <p className="text-sm text-green-700">
-          Payment successful! You now have lifetime access to PetSoft.
+          Payment successful! You now have lifetime access to Homebase!.
         </p>
       )}
       {searchParams.cancelled && (
