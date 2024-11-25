@@ -218,12 +218,18 @@ export async function createCheckoutSession() {
 
   console.log(session.user.email);
 
+  const productPrice = process.env.PROD_PRICE;
+
+  if (!productPrice) {
+    throw new Error("PROD_PRICE is not defined in environment variables");
+  }
+
   // create checkout session
   const checkoutSession = await stripe.checkout.sessions.create({
     customer_email: session.user.email,
     line_items: [
       {
-        price: `${process.env.PROD_PRICE}`,
+        price: productPrice,
         quantity: 1,
       },
     ],
