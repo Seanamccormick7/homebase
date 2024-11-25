@@ -223,7 +223,7 @@ export async function createCheckoutSession() {
     customer_email: session.user.email,
     line_items: [
       {
-        price: "PROD_PRICE",
+        price: `${process.env.PROD_PRICE}`,
         quantity: 1,
       },
     ],
