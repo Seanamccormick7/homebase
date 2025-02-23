@@ -2,11 +2,15 @@
 
 import { auth, signIn, signOut } from "@/lib/auth-no-edge";
 import prisma from "@/lib/db";
-import { authSchema, petFormSchema, petIdSchema } from "@/lib/validations";
+import {
+  authSchema,
+  propertyFormSchema,
+  propertyIdSchema,
+} from "@/lib/validations";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
 import { redirect } from "next/navigation";
-import { checkAuth, getPetById } from "@/lib/server-utils";
+import { checkAuth, getPropertyById } from "@/lib/server-utils";
 import { Prisma } from "@prisma/client";
 import { AuthError } from "next-auth";
 
@@ -92,22 +96,22 @@ export async function logOut() {
   await signOut({ redirectTo: "/" });
 }
 
-// --- pet actions ---
+// --- property actions ---
 
-export async function addPet(pet: unknown) {
+export async function addProperty(property: unknown) {
   const session = await checkAuth();
 
-  const validatedPet = petFormSchema.safeParse(pet);
-  if (!validatedPet.success) {
+  const validatedProperty = propertyFormSchema.safeParse(property);
+  if (!validatedProperty.success) {
     return {
-      message: "Invalid pet data.",
+      message: "Invalid property data.",
     };
   }
 
   try {
-    await prisma.pet.create({
+    await prisma.property.create({
       data: {
-        ...validatedPet.data,
+        ...validatedProperty.data,
         user: {
           connect: {
             id: session.user.id,
@@ -118,35 +122,38 @@ export async function addPet(pet: unknown) {
   } catch (error) {
     console.log(error);
     return {
-      message: "Could not add pet.",
+      message: "Could not add property.",
     };
   }
 
   revalidatePath("/app", "layout");
 }
 
-export async function editPet(petId: unknown, newPetData: unknown) {
+export async function editProperty(
+  propertyId: unknown,
+  newPropertyData: unknown
+) {
   // authentication check
   const session = await checkAuth();
 
   // validation
-  const validatedPetId = petIdSchema.safeParse(petId);
-  const validatedPet = petFormSchema.safeParse(newPetData);
+  const validatedPropertyId = propertyIdSchema.safeParse(propertyId);
+  const validatedProperty = propertyFormSchema.safeParse(newPropertyData);
 
-  if (!validatedPetId.success || !validatedPet.success) {
+  if (!validatedPropertyId.success || !validatedProperty.success) {
     return {
-      message: "Invalid pet data.",
+      message: "Invalid property data.",
     };
   }
 
   // authorization check
-  const pet = await getPetById(validatedPetId.data);
-  if (!pet) {
+  const property = await getPropertyById(validatedPropertyId.data);
+  if (!property) {
     return {
-      message: "Pet not found.",
+      message: "Property not found.",
     };
   }
-  if (pet.userId !== session.user.id) {
+  if (property.userId !== session.user.id) {
     return {
       message: "Not authorized.",
     };
@@ -154,41 +161,41 @@ export async function editPet(petId: unknown, newPetData: unknown) {
 
   // database mutation
   try {
-    await prisma.pet.update({
+    await prisma.property.update({
       where: {
-        id: validatedPetId.data,
+        id: validatedPropertyId.data,
       },
-      data: validatedPet.data,
+      data: validatedProperty.data,
     });
   } catch (error) {
     return {
-      message: "Could not edit pet.",
+      message: "Could not edit property.",
     };
   }
 
   revalidatePath("/app", "layout");
 }
 
-export async function deletePet(petId: unknown) {
+export async function deleteProperty(propertyId: unknown) {
   // authentication check
   const session = await checkAuth();
 
   // validation
-  const validatedPetId = petIdSchema.safeParse(petId);
-  if (!validatedPetId.success) {
+  const validatedPropertyId = propertyIdSchema.safeParse(propertyId);
+  if (!validatedPropertyId.success) {
     return {
-      message: "Invalid pet data.",
+      message: "Invalid property data.",
     };
   }
 
   // authorization check
-  const pet = await getPetById(validatedPetId.data);
-  if (!pet) {
+  const property = await getPropertyById(validatedPropertyId.data);
+  if (!property) {
     return {
-      message: "Pet not found.",
+      message: "Property not found.",
     };
   }
-  if (pet.userId !== session.user.id) {
+  if (property.userId !== session.user.id) {
     return {
       message: "Not authorized.",
     };
@@ -196,14 +203,14 @@ export async function deletePet(petId: unknown) {
 
   // database mutation
   try {
-    await prisma.pet.delete({
+    await prisma.property.delete({
       where: {
-        id: validatedPetId.data,
+        id: validatedPropertyId.data,
       },
     });
   } catch (error) {
     return {
-      message: "Could not delete pet.",
+      message: "Could not delete property.",
     };
   }
 

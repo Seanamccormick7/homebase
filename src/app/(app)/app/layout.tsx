@@ -2,9 +2,9 @@ import AppFooter from "@/components/app-footer";
 import AppHeader from "@/components/app-header";
 import BackgroundPattern from "@/components/background-pattern";
 import { Toaster } from "@/components/ui/sonner";
-import PetContextProvider from "@/contexts/pet-context-provider";
+import PropertyContextProvider from "@/contexts/property-context-provider";
 import SearchContextProvider from "@/contexts/search-context-provider";
-import { checkAuth, getPetsByUserId } from "@/lib/server-utils";
+import { checkAuth, getPropertiesByUserId } from "@/lib/server-utils";
 
 export default async function Layout({
   children,
@@ -12,7 +12,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
   const session = await checkAuth();
-  const pets = await getPetsByUserId(session.user.id);
+  const properties = await getPropertiesByUserId(session.user.id);
 
   return (
     <>
@@ -22,7 +22,9 @@ export default async function Layout({
         <AppHeader />
 
         <SearchContextProvider>
-          <PetContextProvider data={pets}>{children}</PetContextProvider>
+          <PropertyContextProvider data={properties}>
+            {children}
+          </PropertyContextProvider>
         </SearchContextProvider>
 
         <AppFooter />

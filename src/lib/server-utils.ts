@@ -2,7 +2,7 @@ import "server-only";
 
 import { redirect } from "next/navigation";
 import { auth } from "./auth-no-edge";
-import { Pet, User } from "@prisma/client";
+import { Property, User } from "@prisma/client";
 import prisma from "./db";
 
 export async function checkAuth() {
@@ -23,20 +23,20 @@ export async function getUserByEmail(email: User["email"]) {
   return user;
 }
 
-export async function getPetById(petId: Pet["id"]) {
-  const pet = await prisma.pet.findUnique({
+export async function getPropertyById(propertyId: Property["id"]) {
+  const property = await prisma.property.findUnique({
     where: {
-      id: petId,
+      id: propertyId,
     },
   });
-  return pet;
+  return property;
 }
 
-export async function getPetsByUserId(userId: User["id"]) {
-  const pets = await prisma.pet.findMany({
+export async function getPropertiesByUserId(userId: User["id"]) {
+  const properties = await prisma.property.findMany({
     where: {
       userId,
     },
   });
-  return pets;
+  return properties;
 }

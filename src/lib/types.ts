@@ -1,6 +1,6 @@
-import { Pet } from "@prisma/client";
+import { Property } from "@prisma/client";
 
-export type PetEssentials = Omit<
-  Pet,
+export type PropertyEssentials = Omit<
+  Property,
   "id" | "createdAt" | "updatedAt" | "userId"
 >;

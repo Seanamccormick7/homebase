@@ -7,7 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Homebase - Propety Management Portal",
+  title: "Homebase - Property Management Portal",
   description: "Manage all your properties with Homebase.",
 };
 

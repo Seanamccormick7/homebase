@@ -1,41 +1,42 @@
 "use client";
 
-import { usePetContext } from "@/lib/hooks";
+import { usePropertyContext } from "@/lib/hooks";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
-import PetFormBtn from "./pet-form-btn";
+import PropertyFormBtn from "./property-form-btn";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DEFAULT_PET_IMAGE } from "@/lib/constants";
-import { TPetForm, petFormSchema } from "@/lib/validations";
+import { TPropertyForm, propertyFormSchema } from "@/lib/validations";
 
-type PetFormProps = {
+type PropertyFormProps = {
   actionType: "add" | "edit";
   onFormSubmission: () => void;
 };
 
-export default function PetForm({
+export default function PropertyForm({
   actionType,
   onFormSubmission,
-}: PetFormProps) {
-  const { handleAddPet, handleEditPet, selectedPet } = usePetContext();
+}: PropertyFormProps) {
+  const { handleAddProperty, handleEditProperty, selectedProperty } =
+    usePropertyContext();
 
   const {
     register,
     trigger,
     getValues,
     formState: { errors },
-  } = useForm<TPetForm>({
-    resolver: zodResolver(petFormSchema),
+  } = useForm<TPropertyForm>({
+    resolver: zodResolver(propertyFormSchema),
     defaultValues:
       actionType === "edit"
         ? {
-            name: selectedPet?.name,
-            ownerName: selectedPet?.ownerName,
-            imageUrl: selectedPet?.imageUrl,
-            age: selectedPet?.age,
-            notes: selectedPet?.notes,
+            name: selectedProperty?.name,
+            ownerName: selectedProperty?.ownerName,
+            imageUrl: selectedProperty?.imageUrl,
+            age: selectedProperty?.age,
+            notes: selectedProperty?.notes,
           }
         : undefined,
   });
@@ -50,13 +51,13 @@ export default function PetForm({
         //
         onFormSubmission();
 
-        const petData = getValues();
-        petData.imageUrl = petData.imageUrl || DEFAULT_PET_IMAGE;
+        const propertyData = getValues();
+        propertyData.imageUrl = propertyData.imageUrl || DEFAULT_PET_IMAGE;
 
         if (actionType === "add") {
-          await handleAddPet(petData);
+          await handleAddProperty(propertyData);
         } else if (actionType === "edit") {
-          await handleEditPet(selectedPet!.id, petData);
+          await handleEditProperty(selectedProperty!.id, propertyData);
         }
       }}
       className="flex flex-col"
@@ -99,7 +100,7 @@ export default function PetForm({
         </div>
       </div>
 
-      <PetFormBtn actionType={actionType} />
+      <PropertyFormBtn actionType={actionType} />
     </form>
   );
 }

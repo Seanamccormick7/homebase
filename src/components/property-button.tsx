@@ -9,23 +9,23 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./ui/dialog";
-import PetForm from "./pet-form";
+import PropertyForm from "./property-form";
 import { useState } from "react";
 import { flushSync } from "react-dom";
 
-type PetButtonProps = {
+type PropertyButtonProps = {
   actionType: "add" | "edit" | "checkout";
   disabled?: boolean;
   onClick?: () => void;
   children?: React.ReactNode;
 };
 
-export default function PetButton({
+export default function PropertyButton({
   actionType,
   disabled,
   onClick,
   children,
-}: PetButtonProps) {
+}: PropertyButtonProps) {
   const [isFormOpen, setIsFormOpen] = useState(false);
 
   if (actionType === "checkout") {
@@ -51,11 +51,11 @@ export default function PetButton({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {actionType === "add" ? "Add a new pet" : "Edit pet"}
+            {actionType === "add" ? "Add a new property" : "Edit property"}
           </DialogTitle>
         </DialogHeader>
 
-        <PetForm
+        <PropertyForm
           actionType={actionType}
           onFormSubmission={() => {
             flushSync(() => {
