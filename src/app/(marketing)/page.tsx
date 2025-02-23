@@ -21,7 +21,7 @@ export default function Home() {
         </h1>
         <p className="text-2xl font-medium max-w-[600px]">
           Use to easily keep track of properties under your care. Get lifetime
-          access for $299.
+          access for $29.99.
         </p>
         <div className="mt-10 space-x-3">
           <Button asChild>

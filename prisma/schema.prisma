@@ -23,9 +23,9 @@ model User {
 model Property {
   id        String   @id @default(cuid())
   name      String
-  ownerName String
+  location  String
   imageUrl  String
-  age       Int
+  price     Int
   notes     String
   user      User     @relation(fields: [userId], references: [id])
   userId    String

@@ -72,12 +72,14 @@ function OtherInfo({ property }: Props) {
         <h3 className="text-[13px] font-medium uppercase text-zinc-700">
           Owner name
         </h3>
-        <p className="mt-1 text-lg text-zinc-800">{property.ownerName}</p>
+        <p className="mt-1 text-lg text-zinc-800">{property.location}</p>
       </div>
 
       <div>
-        <h3 className="text-[13px] font-medium uppercase text-zinc-700">Age</h3>
-        <p className="mt-1 text-lg text-zinc-800">{property.age}</p>
+        <h3 className="text-[13px] font-medium uppercase text-zinc-700">
+          Price
+        </h3>
+        <p className="mt-1 text-lg text-zinc-800">{property.price}</p>
       </div>
     </div>
   );

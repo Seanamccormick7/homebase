@@ -6,7 +6,7 @@ export const propertyIdSchema = z.string().cuid();
 export const propertyFormSchema = z
   .object({
     name: z.string().trim().min(1, { message: "Name is required" }).max(100),
-    ownerName: z
+    location: z
       .string()
       .trim()
       .min(1, { message: "Owner name is required" })
@@ -15,7 +15,7 @@ export const propertyFormSchema = z
       z.literal(""),
       z.string().trim().url({ message: "Image url must be a valid url" }),
     ]),
-    age: z.coerce.number().int().positive().max(99999),
+    price: z.coerce.number().int().positive().max(99999),
     notes: z.union([z.literal(""), z.string().trim().max(1000)]),
   })
   .transform((data) => ({

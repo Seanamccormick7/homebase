@@ -4,11 +4,9 @@ export default function Branding() {
   return (
     <section>
       <H1>
-        Property<span className="font-semibold">Soft</span>
+        Home<span className="font-semibold">Base</span>
       </H1>
-      <p className="text-lg opacity-80">
-        Manage your property daycare with ease
-      </p>
+      <p className="text-lg opacity-80">Manage your real estate with ease</p>
     </section>
   );
 }

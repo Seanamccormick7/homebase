@@ -33,9 +33,9 @@ export default function PropertyForm({
       actionType === "edit"
         ? {
             name: selectedProperty?.name,
-            ownerName: selectedProperty?.ownerName,
+            location: selectedProperty?.location,
             imageUrl: selectedProperty?.imageUrl,
-            age: selectedProperty?.age,
+            price: selectedProperty?.price,
             notes: selectedProperty?.notes,
           }
         : undefined,
@@ -70,10 +70,10 @@ export default function PropertyForm({
         </div>
 
         <div className="space-y-1">
-          <Label htmlFor="ownerName">Owner Name</Label>
-          <Input id="ownerName" {...register("ownerName")} />
-          {errors.ownerName && (
-            <p className="text-red-500">{errors.ownerName.message}</p>
+          <Label htmlFor="location">Location</Label>
+          <Input id="location" {...register("location")} />
+          {errors.location && (
+            <p className="text-red-500">{errors.location.message}</p>
           )}
         </div>
 
@@ -86,9 +86,11 @@ export default function PropertyForm({
         </div>
 
         <div className="space-y-1">
-          <Label htmlFor="age">Age</Label>
-          <Input id="age" {...register("age")} />
-          {errors.age && <p className="text-red-500">{errors.age.message}</p>}
+          <Label htmlFor="price">Age</Label>
+          <Input id="price" {...register("price")} />
+          {errors.price && (
+            <p className="text-red-500">{errors.price.message}</p>
+          )}
         </div>
 
         <div className="space-y-1">

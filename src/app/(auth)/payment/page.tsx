@@ -41,7 +41,7 @@ export default function Page({
             });
           }}
         >
-          Buy lifetime access for $299
+          Buy lifetime access for $29.99
         </Button>
       )}
 
