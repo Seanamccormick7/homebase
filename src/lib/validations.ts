@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { DEFAULT_PET_IMAGE } from "./constants";
+import { DEFAULT_PROPERTY_IMAGE } from "./constants";
 
 export const propertyIdSchema = z.string().cuid();
 
@@ -20,7 +20,7 @@ export const propertyFormSchema = z
   })
   .transform((data) => ({
     ...data,
-    imageUrl: data.imageUrl || DEFAULT_PET_IMAGE,
+    imageUrl: data.imageUrl || DEFAULT_PROPERTY_IMAGE,
   }));
 
 export type TPropertyForm = z.infer<typeof propertyFormSchema>;

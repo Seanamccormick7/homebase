@@ -7,7 +7,7 @@ import { Textarea } from "./ui/textarea";
 import PropertyFormBtn from "./property-form-btn";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { DEFAULT_PET_IMAGE } from "@/lib/constants";
+import { DEFAULT_PROPERTY_IMAGE } from "@/lib/constants";
 import { TPropertyForm, propertyFormSchema } from "@/lib/validations";
 
 type PropertyFormProps = {
@@ -52,7 +52,7 @@ export default function PropertyForm({
         onFormSubmission();
 
         const propertyData = getValues();
-        propertyData.imageUrl = propertyData.imageUrl || DEFAULT_PET_IMAGE;
+        propertyData.imageUrl = propertyData.imageUrl || DEFAULT_PROPERTY_IMAGE;
 
         if (actionType === "add") {
           await handleAddProperty(propertyData);
