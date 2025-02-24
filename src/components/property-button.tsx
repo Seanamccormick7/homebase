@@ -30,7 +30,7 @@ export default function PropertyButton({
 
   if (actionType === "checkout") {
     return (
-      <Button variant="secondary" disabled={disabled} onClick={onClick}>
+      <Button variant="default" disabled={disabled} onClick={onClick}>
         {children}
       </Button>
     );

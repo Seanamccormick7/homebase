@@ -52,13 +52,13 @@ function TopBar({ property }: Props) {
 
       <h2 className="text-3xl font-semibold leading-7 ml-5">{property.name}</h2>
 
-      <div className="ml-auto space-x-2">
+      <div className="ml-auto flex space-x-2">
         <PropertyButton actionType="edit">Edit</PropertyButton>
         <PropertyButton
           actionType="checkout"
           onClick={async () => await handleCheckoutProperty(property.id)}
         >
-          Checkout
+          Mark as sold
         </PropertyButton>
       </div>
     </div>
@@ -66,11 +66,12 @@ function TopBar({ property }: Props) {
 }
 
 function OtherInfo({ property }: Props) {
+  const formattedPrice = property.price.toLocaleString("en-US");
   return (
     <div className="flex justify-around py-10 px-5 text-center">
       <div>
         <h3 className="text-[13px] font-medium uppercase text-zinc-700">
-          Owner name
+          Location
         </h3>
         <p className="mt-1 text-lg text-zinc-800">{property.location}</p>
       </div>
@@ -79,7 +80,7 @@ function OtherInfo({ property }: Props) {
         <h3 className="text-[13px] font-medium uppercase text-zinc-700">
           Price
         </h3>
-        <p className="mt-1 text-lg text-zinc-800">{property.price}</p>
+        <p className="mt-1 text-lg text-zinc-800">${formattedPrice}</p>
       </div>
     </div>
   );

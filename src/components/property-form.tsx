@@ -86,7 +86,7 @@ export default function PropertyForm({
         </div>
 
         <div className="space-y-1">
-          <Label htmlFor="price">Age</Label>
+          <Label htmlFor="price">Price</Label>
           <Input id="price" {...register("price")} />
           {errors.price && (
             <p className="text-red-500">{errors.price.message}</p>

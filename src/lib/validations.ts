@@ -9,13 +9,13 @@ export const propertyFormSchema = z
     location: z
       .string()
       .trim()
-      .min(1, { message: "Owner name is required" })
+      .min(1, { message: "Location is required" })
       .max(100),
     imageUrl: z.union([
       z.literal(""),
       z.string().trim().url({ message: "Image url must be a valid url" }),
     ]),
-    price: z.coerce.number().int().positive().max(99999),
+    price: z.coerce.number().int().positive().max(9999999999999999),
     notes: z.union([z.literal(""), z.string().trim().max(1000)]),
   })
   .transform((data) => ({
